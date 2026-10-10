@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HASHINA KHATUN ❤️</title>
+    <link rel="stylesheet" href="index.css">
+
+<audio id="birthdaySong" src="birthday-song.mp3" preload="auto"></audio>
+   
+  </head>
+
+  <body>
+    <div class="bg"></div>
+    <div class="grid"></div>
+    <div class="scanlines"></div>
+
+    <div class="game">
+      <!-- ================================================= -->
+      <!-- SCENE 1 : BOOT -->
+      <!-- ================================================= -->
+
+      <section class="scene active" id="scene1">
+        <div class="terminal">
+          <div class="terminal-top">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+
+            <span class="terminal-title"> HASHINA </span>
+          </div>
+
+          <div class="terminal-body">
+            <div class="logo">HASHINA</div>
+
+            <div class="prompt">> Boot sequence initiated...</div>
+
+            <div class="prompt">> Loading special event...</div>
+
+            <div class="prompt green">> ████████████████████ 100%</div>
+
+            <br />
+
+            <div class="prompt cyan">> EVENT DETECTED</div>
+
+            <div class="prompt">
+              > SUBJECT:
+              <span class="pink"> HASHINA KHATUN </span>
+            </div>
+
+            <div class="prompt">
+              > STATUS:
+              <span class="green"> VERY SPECIAL </span>
+            </div>
+
+            <button class="game-btn" onclick="nextScene(2)">
+              START EXPERIENCE →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- SCENE 2 : FIND HEART -->
+      <!-- ================================================= -->
+
+      <section class="scene" id="scene2">
+        <div class="game-box">
+          <div class="status">MISSION 01 / FIND THE REAL HEART</div>
+
+          <h2>There is one real heart hidden here.</h2>
+
+          <p style="margin: 12px 0 20px; color: #7c8b87">
+            Find it to continue...
+          </p>
+
+          <div class="hidden-area" id="heartArea"></div>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- SCENE 3 : PASSWORD -->
+      <!-- ================================================= -->
+
+      <section class="scene" id="scene3">
+        <div class="lock">
+          <div class="lock-icon">🔐</div>
+
+          <div class="green">ACCESS LOCKED</div>
+
+          <h2 style="margin-top: 15px">SECRET PASSWORD</h2>
+
+          <p style="color: #777; margin-top: 10px">
+            Hint: Her name is the key.
+          </p>
+
+          <input
+            class="password-input"
+            id="password"
+            type="text"
+            placeholder="_ _ _ _ _ _"
+            autocomplete="off"
+          />
+
+          <div class="error" id="passwordError"></div>
+
+          <button class="game-btn" onclick="checkPassword()">UNLOCK</button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- SCENE 4 : HEART SYNC -->
+      <!-- ================================================= -->
+
+      <section class="scene" id="scene4">
+        <div class="sync">
+          <div class="status">MISSION 03 / HEART SYNCHRONIZATION</div>
+
+          <h2>Finding the connection...</h2>
+
+          <div class="sync-stage" id="sync">
+            <div class="beam"></div>
+
+            <div class="sync-heart a">❤️</div>
+
+            <div class="sync-heart b">💜</div>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <p id="syncText" style="margin-top: 15px; color: #777">SYNC: 0%</p>
+
+          <button class="game-btn" onclick="startSync()">START SYNC ❤️</button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- SCENE 5 : PHOTO -->
+      <!-- ================================================= -->
+
+      <section class="scene" id="scene5">
+        <div class="reveal">
+          <div class="classified">CLASSIFIED DATA FOUND</div>
+
+          <p style="color: #777">Identity successfully recovered...</p>
+
+          <div class="photo-frame">
+            <img src="hashina.jpg" alt="Hashina Khatun" />
+          </div>
+
+          <h2>
+            HASHINA KHATUN
+            <span class="pink">❤️</span>
+          </h2>
+
+          <p style="color: #999; margin-top: 10px">
+            Subject: The reason this little game exists.
+          </p>
+
+          <button class="game-btn" onclick="nextScene(6)">
+            COMPLETE MISSION →
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- SCENE 6 : FINAL -->
+      <!-- ================================================= -->
+
+      <section class="scene" id="scene6">
+        <div class="final">
+          <div class="mission">
+            <div class="green">✓ MISSION COMPLETE</div>
+
+            <div class="ascii">
+              <pre>
+╔══════════════════════════╗
+║                          ║
+║       🎂  2026  🎂      ║
+║                          ║
+║      SYSTEM RESULT       ║
+║                          ║
+║    HAPPINESS      100%   ║
+║    SMILES         100%   ║
+║    DREAMS         100%   ║
+║                          ║
+╚══════════════════════════╝
+</pre
+              >
+            </div>
+
+            <div class="final-title">HAPPY</div>
+
+            <h2>BIRTHDAY</h2>
+
+            <h2 class="pink">HASHINA KHATUN ❤️</h2>
+
+            <p style="margin-top: 20px; color: #aaa">
+              May every new chapter of your life bring you something beautiful.
+              <br /><br />
+
+              May your smile never lose its magic, and may your dreams keep
+              getting closer to reality. ✨
+              <br /><br />
+
+              <span class="yellow"> Happy Birthday! 🎂❤️ </span>
+            </p>
+
+<!-- Birthday Photos: Initially Hidden -->
+<div class="birthday-photos" id="birthdayPhotos">
+  <img src="hashnia1.jpg" alt="Hashina Photo 1">
+<img src="hashina2.jpg" alt="Hashina Photo 1">
+<img src="hashina3.jpg" alt="Hashina Photo 1">
+</div>
+            <button class="danger-btn" onclick="dontPress()">
+              ⚠ DO NOT PRESS ❤️
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    
+
+    <script src="Birth_Day.js">
+     
+    </script>
+  </body>
+</html>

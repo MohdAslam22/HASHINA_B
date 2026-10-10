@@ -1,0 +1,704 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --green: #00ff9d;
+  --cyan: #00e5ff;
+  --pink: #ff2fa4;
+  --purple: #9b5cff;
+  --yellow: #ffe66d;
+  --black: #020408;
+}
+
+body {
+  background: var(--black);
+  color: white;
+  font-family: Consolas, "Courier New", monospace;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  background:
+    radial-gradient(circle at 20% 20%, #102b29 0, transparent 30%),
+    radial-gradient(circle at 80% 80%, #270b2d 0, transparent 30%), #020408;
+}
+
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(#00ff9d22 1px, transparent 1px),
+    linear-gradient(90deg, #00ff9d22 1px, transparent 1px);
+  background-size: 45px 45px;
+  animation: gridMove 8s linear infinite;
+}
+
+@keyframes gridMove {
+  to {
+    background-position: 0 45px;
+  }
+}
+
+/* ================= SCANLINES ================= */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(255, 255, 255, 0.018) 4px
+  );
+}
+
+/* ================= PARTICLES ================= */
+
+.particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatParticle {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+/* ================= GAME ================= */
+
+.game {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.scene.active {
+  display: flex;
+  animation: sceneIn 0.7s ease;
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ================= TERMINAL ================= */
+
+.terminal {
+  width: min(700px, 94vw);
+  border: 1px solid #00ff9d55;
+  background: #030806dd;
+  box-shadow:
+    0 0 40px #00ff9d15,
+    inset 0 0 30px #00ff9d08;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.terminal-top {
+  height: 38px;
+  background: #0a1513;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 7px;
+  border-bottom: 1px solid #00ff9d20;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red {
+  background: #ff5f56;
+}
+.dot.yellow {
+  background: #ffbd2e;
+}
+.dot.green {
+  background: #27c93f;
+}
+
+.terminal-title {
+  margin-left: 10px;
+  color: #71817d;
+  font-size: 12px;
+}
+
+.terminal-body {
+  padding: 35px;
+}
+
+.logo {
+  color: var(--green);
+  font-size: clamp(28px, 6vw, 60px);
+  font-weight: bold;
+  text-shadow: 0 0 20px #00ff9d;
+  margin-bottom: 20px;
+}
+
+.prompt {
+  color: #71817d;
+  margin-bottom: 10px;
+}
+
+.green {
+  color: var(--green);
+}
+
+.cyan {
+  color: var(--cyan);
+}
+
+.pink {
+  color: var(--pink);
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+/* ================= BUTTON ================= */
+
+.game-btn {
+  margin-top: 28px;
+  padding: 13px 24px;
+  border: 1px solid var(--green);
+  background: #00ff9d0b;
+  color: var(--green);
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.25s;
+  box-shadow: 0 0 12px #00ff9d15;
+}
+
+.game-btn:hover {
+  background: var(--green);
+  color: #00120a;
+  box-shadow:
+    0 0 20px var(--green),
+    0 0 50px #00ff9d55;
+  transform: translateY(-2px);
+}
+
+/* ================= HEART GAME ================= */
+
+.game-box {
+  width: min(850px, 95vw);
+  text-align: center;
+}
+
+.status {
+  border: 1px solid #ffffff16;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #ffffff05;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.hidden-area {
+  height: 420px;
+  border: 1px solid #00ff9d22;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, #00ff9d05, transparent 50%);
+}
+
+.hidden-item {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  color: #60706c;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.hidden-item:hover {
+  color: #00ff9d;
+  transform: scale(1.3);
+}
+
+.hidden-item.real {
+  color: var(--pink);
+  text-shadow: 0 0 20px var(--pink);
+  font-size: 32px;
+  animation: realHeart 1s infinite;
+}
+
+@keyframes realHeart {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+/* ================= PASSWORD ================= */
+
+.lock {
+  width: min(480px, 94vw);
+  text-align: center;
+  border: 1px solid #9b5cff55;
+  background: #080411dd;
+  padding: 40px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 50px #9b5cff15;
+}
+
+.lock-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 15px var(--purple));
+}
+
+.password-input {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  background: #020207;
+  border: 1px solid #9b5cff66;
+  color: #fff;
+  text-align: center;
+  font-family: inherit;
+  font-size: 18px;
+  outline: none;
+  border-radius: 5px;
+  letter-spacing: 5px;
+}
+
+.password-input:focus {
+  box-shadow: 0 0 20px #9b5cff33;
+}
+
+.error {
+  color: #ff4d6d;
+  margin-top: 12px;
+  height: 20px;
+}
+
+/* ================= HEART SYNC ================= */
+
+.sync {
+  width: min(800px, 95vw);
+  text-align: center;
+}
+
+.sync-stage {
+  height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.sync-heart {
+  font-size: 80px;
+  position: relative;
+  z-index: 2;
+  animation: pulse 1s infinite;
+}
+
+.sync-heart.a {
+  filter: drop-shadow(0 0 30px var(--pink));
+}
+
+.sync-heart.b {
+  filter: drop-shadow(0 0 30px var(--purple));
+}
+
+.sync.connected .a {
+  animation: heartA 2s forwards;
+}
+
+.sync.connected .b {
+  animation: heartB 2s forwards;
+}
+
+@keyframes heartA {
+  to {
+    transform: translateX(calc(50vw - 190px)) scale(1.3);
+  }
+}
+
+@keyframes heartB {
+  to {
+    transform: translateX(calc(-50vw + 190px)) scale(1.3);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.beam {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--pink),
+    var(--purple),
+    transparent
+  );
+  box-shadow: 0 0 20px var(--pink);
+  animation: beam 1.5s infinite alternate;
+}
+
+@keyframes beam {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  background: #ffffff0d;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+  box-shadow: 0 0 15px var(--pink);
+  transition: width 0.08s linear;
+}
+
+/* ================= PHOTO REVEAL ================= */
+
+.reveal {
+  text-align: center;
+}
+
+.classified {
+  color: var(--pink);
+  letter-spacing: 5px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.photo-frame {
+  width: 250px;
+  height: 310px;
+  margin: 25px auto;
+  position: relative;
+  padding: 5px;
+  background: conic-gradient(
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--pink)
+  );
+  border-radius: 18px;
+  animation: frameRotate 4s linear infinite;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  animation: photoIn 1.5s ease;
+}
+
+@keyframes photoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotateY(90deg);
+    filter: blur(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes frameRotate {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* ================= FINAL ================= */
+
+.final {
+  text-align: center;
+  width: min(650px, 95vw);
+}
+
+.mission {
+  border: 1px solid #00ff9d55;
+  background: #02100bdd;
+  padding: 35px 25px;
+  box-shadow:
+    0 0 50px #00ff9d12,
+    inset 0 0 40px #00ff9d08;
+}
+
+.ascii {
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.3;
+  margin: 15px 0 25px;
+}
+
+.final-title {
+  font-family: Arial, sans-serif;
+  font-size: clamp(42px, 10vw, 75px);
+  font-weight: 900;
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--yellow),
+    var(--pink)
+  );
+  background-size: 300%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: finalGradient 4s linear infinite;
+}
+
+@keyframes finalGradient {
+  to {
+    background-position: 300%;
+  }
+}
+
+/* ================= EASTER EGG ================= */
+
+.danger-btn {
+  margin-top: 30px;
+  padding: 13px 25px;
+  background: #ff17440b;
+  border: 1px solid #ff174466;
+  color: #ff6680;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.danger-btn:hover {
+  background: #ff1744;
+  color: white;
+  box-shadow: 0 0 30px #ff1744;
+}
+
+/* ================= GLITCH ================= */
+
+.glitch {
+  animation: glitch 0.3s linear 2;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(5px, -2px);
+  }
+  50% {
+    transform: translate(-5px, 2px);
+  }
+  75% {
+    transform: translate(3px, 1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* ================= CONFETTI ================= */
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 7px;
+  height: 15px;
+  z-index: 200;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+/* ================= FIREWORK ================= */
+
+.firework {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  z-index: 190;
+  animation: boom 1.2s forwards;
+}
+
+@keyframes boom {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 white;
+  }
+  100% {
+    opacity: 0;
+    box-shadow:
+      0 -90px var(--pink),
+      65px -65px var(--cyan),
+      90px 0 var(--yellow),
+      65px 65px var(--purple),
+      0 90px var(--pink),
+      -65px 65px var(--cyan),
+      -90px 0 var(--yellow),
+      -65px -65px var(--purple);
+  }
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: #050b09ee;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 15px 20px;
+  border-radius: 7px;
+  z-index: 300;
+  transform: translateX(130%);
+  transition: 0.4s;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+  .terminal-body {
+    padding: 25px 18px;
+  }
+
+  .hidden-area {
+    height: 350px;
+  }
+
+  .sync-heart {
+    font-size: 60px;
+  }
+
+  .photo-frame {
+    width: 210px;
+    height: 260px;
+  }
+
+  .ascii {
+    font-size: 9px;
+  }
+}
+
+
+******
+
+/* Birthday photos - hidden initially */
+.birthday-photos {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.birthday-photos.show {
+  display: flex;
+  animation: photoReveal 1s ease;
+}
+
+.birthday-photos img {
+  width: 150px;
+  height: 180px;
+  object-fit: cover;
+  border: 3px solid #ff2fa4;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #ff2fa4;
+}
+
+@keyframes photoReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .birthday-photos img {
+    width: 115px;
+    height: 145px;
+  }
+}
